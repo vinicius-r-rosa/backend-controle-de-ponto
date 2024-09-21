@@ -1,0 +1,274 @@
+{
+  "info": {
+    "name": "Collection de Batidas",
+    "_postman_id": "unique-collection-id",
+    "description": "Collection para testar a API de batidas.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registrar Batidas",
+      "item": [
+        {
+          "name": "Registro 1 - Início do expediente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T08:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Registro 2 (erro) - Data com horário antes do já registrado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T07:59:59\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Registro 2 (erro) - Intervalo entre batidas de no mínimo 15 minutos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T08:14:59\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Registro 2 - Início do almoço",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T12:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Registro 3 (erro) - Fim do intervalo antes de 1h",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T12:59:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Registro 3 - Fim do intervalo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T13:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Registro 4 - Fim do expediente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T17:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Registro 5 (erro) - Mais de 4 batidas no dia",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T18:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Fim de semana",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-26T08:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Horário já registrado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T08:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Data inválida (mês 13)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-13-30T08:00:00\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Batida antes das 06:00",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T05:59:59\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        },
+        {
+          "name": "Batida depois das 22:00",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"momento\":\"2018-08-31T22:00:01\"}"
+            },
+            "url": "http://localhost:3000/v1/batidas"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Folhas de Ponto",
+      "item": [
+        {
+          "name": "Obter todas as folhas de ponto",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/v1/folhas-de-ponto/all"
+          }
+        },
+        {
+          "name": "Obter folhas de ponto de agosto de 2018",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/v1/folhas-de-ponto/2018-08"
+          }
+        },
+        {
+          "name": "Obter folhas de ponto de setembro de 2024",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/v1/folhas-de-ponto/2024-09"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Deletar Batidas",
+      "item": [
+        {
+          "name": "Deletar todas as batidas",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/v1/batidas/all"
+          }
+        }
+      ]
+    }
+  ]
+}

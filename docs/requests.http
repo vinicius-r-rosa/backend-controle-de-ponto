@@ -1,0 +1,154 @@
+# --- Batidas
+#
+# registro 1 - início do expediente
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T08:00:00"
+}
+
+###
+#
+# registro 2 (erro) - data com horário antes do já registrado
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T07:59:59"
+}
+
+###
+#
+# registro 2 (erro) intervalo entre batidas de no mínimo 15 minutos
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T08:14:59"
+}
+
+###
+#
+# registro 2 - início do almoço
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T12:00:00"
+}
+
+###
+#
+# registro 3 (erro) - fim do intervalo antes de 1h
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T12:59:00"
+}
+
+###
+#
+# registro 3 - fim do intervalo
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T13:00:00"
+}
+
+###
+#
+# registro 4 - fim do expediente
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T17:00:00"
+}
+
+###
+#
+# registro 5 (erro) - mais de 4 batidas no dia
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T18:00:00"
+}
+
+###
+#
+# fim de semana
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-26T08:00:00"
+}
+
+###
+#
+# horário já registrado
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T08:00:00"
+}
+
+###
+#
+# Data inválida (mês 13)
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-13-30T08:00:00"
+}
+
+###
+#
+# batida antes das 06:00
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T05:59:59"
+}
+
+###
+#
+# batida depois das 22:00
+POST http://localhost:3000/v1/batidas HTTP/1.1
+content-type: application/json
+
+{
+  "momento": "2018-08-31T22:00:01"
+}
+
+###
+#
+# ---
+#
+# --- Folhas de ponto
+#
+GET http://localhost:3000/v1/folhas-de-ponto/all HTTP/1.1
+###
+#
+GET http://localhost:3000/v1/folhas-de-ponto/2018-08 HTTP/1.1
+###
+#
+GET http://localhost:3000/v1/folhas-de-ponto/2024-09 HTTP/1.1
+###
+#
+# ---
+#
+# --- Deletar todas as batidas
+DELETE http://localhost:3000/v1/batidas/all HTTP/1.1
+
+###
+#
+# ---
+#
